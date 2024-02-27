@@ -4,10 +4,10 @@
 This custom dosing automation, named "Turbidostat Increase Stress", is designed for Pioreactors to maintain a specified target optical density (OD) in a culture while gradually increasing the ratio of an alternate media type.
 
 ## Functionality:
-Maintains Target OD: It automatically adjusts the media in the bioreactor to maintain a specified target OD.
-Alternate Media Introduction: Over time, the automation increases the proportion of an alternate media in the culture.
-Dilution Process: When the OD exceeds the target, the system performs a dilution, replacing a portion of the culture with a mix of normal and alternate media.
-Calibration Checks: It includes checks to ensure that the necessary pumps (media, waste, alt_media) are calibrated before running.
+* Maintains Target OD: It automatically adjusts the media in the bioreactor to maintain a specified target OD.
+* Alternate Media Introduction: Over time, the automation increases the proportion of an alternate media in the culture.
+* Dilution Process: When the OD exceeds the target, the system performs a dilution, replacing a portion of the culture with a mix of normal and alternate media.
+* Calibration Checks: It includes checks to ensure that the necessary pumps (media, waste, alt_media) are calibrated before running.
 
 
 ## User Inputs:
