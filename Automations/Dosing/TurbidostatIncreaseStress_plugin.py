@@ -49,8 +49,13 @@ class TurbidostatIncreaseStress(DosingAutomationJobContrib):
                 if pump not in cache:
                     raise CalibrationError(f"{pump} pump calibration must be performed first.")
 
+
     def execute(self):
-        if self.latest_od['2'] > self.target_od: # The 2 refers to which channel is the one reading OD
+    # Check if the latest OD reading is available
+    if is_job_running(ODReading.job_name, unit=self.unit, experiment=self.experiment):
+        latest_od = self.latest_od.get('2')  # 2 is the channel for OD readings
+
+        if (latest_od is not None) and (latest_od > self.target_od):
             self.dilution_count += 1
             alt_media_ml = self.volume * self.alt_media_ratio # This calculates the volume of alternate media to add based on the current alt_media_ratio.
             media_ml = self.volume - alt_media_ml              # This calculates the remaining volume to be filled with normal media.
@@ -59,6 +64,9 @@ class TurbidostatIncreaseStress(DosingAutomationJobContrib):
             if self.dilution_count >= self.dilutions:
                 self.update_media_ratio() # If true, update_media_ratio method is called to update the ratio of alternate media
                 self.dilution_count = 0 # Reset the count for the next cycle
+    else:
+        self.logger.warning("OD Reading job is not running. Latest OD data is not available.")
+   
 
     def update_media_ratio(self):
         self.alt_media_ratio += self.alt_media_ratio_increase
