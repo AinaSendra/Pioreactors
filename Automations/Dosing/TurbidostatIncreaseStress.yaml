@@ -1,9 +1,3 @@
-plugin:
-  name: TurbidostatIncreaseStress
-  version: 1.0
-  description: "Dosing automation for maintaining target OD with increasing alternate media ratio."
-  main: TurbidostatIncreaseStress.py # The main script file
-  class: TurbidostatIncreaseStress   # The main class
 
 display_name: Turbidostat Increase Stress
 automation_name: turbidostat_increase_stress
