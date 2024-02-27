@@ -1,0 +1,20 @@
+Your Python script is designed for automated dosing control in a Pioreactor system. It defines a class TurbidostatIncreaseStress, derived from DosingAutomationJobContrib, to implement a turbidostat operation where the ratio of alternate media to normal media is adjusted based on optical density readings. Key components:
+
+1) Class Definition: The class has several settings like target_od, volume, dilutions, initial_alt_media, and alt_media_ratio_increase.
+
+2) Initialization: In __init__, it initializes these settings and performs pump calibration checks.
+
+3) Calibration Check: The check_calibration method ensures necessary pumps are calibrated.
+
+4) Execution Logic: The execute method contains the logic for dosing, adjusting the media ratio after a set number of dilutions.
+
+5) Update Media Ratio: The update_media_ratio method modifies the alternate media ratio.
+
+6) Command Line Arguments: The script uses argparse to allow users to input parameters via command line.
+
+7) Running the Automation: Finally, it creates an instance of DosingController and runs the automation until manually stopped.
+
+This script automates the process of maintaining a culture at a target optical density by alternating between different media types, based on real-time measurements and user-defined parameters.
+
+
+Do (2) and (3) do the same? Not really. We add (3) to make (2) more concise and be able to reuse (3) elsewhere in the class. Explanation: using a separate check_calibration method is about code organization and maintainability. It keeps the initialization method (__init__) concise and focused on initializing the object, while check_calibration handles the specific task of checking the calibrations.

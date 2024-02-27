@@ -1,0 +1,34 @@
+plugin:
+  name: TurbidostatIncreaseStress
+  version: 1.0
+  description: "Dosing automation for maintaining target OD with increasing alternate media ratio."
+  main: TurbidostatIncreaseStress.py # The main script file
+  class: TurbidostatIncreaseStress   # The main class
+
+display_name: Turbidostat Increase Stress
+automation_name: turbidostat_increase_stress
+source: turbidostat_increase_stress_plugin
+description: "Automation for maintaining target OD with controlled increase in alternate media ratio."
+
+
+fields:
+  - key: target_od
+    default: 2.0
+    unit: od600
+    label: Target Optical Density
+  - key: volume
+    default: 5.0
+    unit: mL
+    label: Dilution Volume
+  - key: dilutions
+    default: 10
+    unit: count
+    label: Number of Dilutions
+  - key: initial_alt_media
+    default: 0.25
+    unit: ratio
+    label: Initial Alternate Media Ratio
+  - key: alt_media_ratio_increase
+    default: 0.05
+    unit: ratio
+    label: Alternate Media Ratio Increase per Cycle
