@@ -4,20 +4,20 @@
 This custom dosing automation, named "Turbidostat Increase Stress", is designed for Pioreactors to maintain a specified target optical density (OD) in a culture while gradually increasing the ratio of an alternate media type.
 
 ## Functionality:
-* Maintains Target OD: It automatically adjusts the media in the bioreactor to maintain a specified target OD.
-* Alternate Media Introduction: Over time, the automation increases the proportion of an alternate media in the culture.
-* Dilution Process: When the OD exceeds the target, the system performs a dilution, replacing a portion of the culture with a mix of normal and alternate media.
-* Calibration Checks: It includes checks to ensure that the necessary pumps (media, waste, alt_media) are calibrated before running.
+* **Maintains Target OD**: It automatically adjusts the media in the bioreactor to maintain a specified target OD.
+* **Alternate Media Introduction**: Over time, the automation increases the proportion of the alternate media in the culture.
+* **Dilution Process**: When the OD exceeds the target, the system performs a dilution, replacing a portion of the culture with a mix of normal and alternate media.
+* **Calibration Checks**: It includes checks to ensure that the necessary pumps (media, waste, alt_media) are calibrated before running.
 
 
 ## User Inputs:
 The user must specify the following parameters:
 
-target_od: The desired optical density to maintain.
-volume: The volume of media to be pumped in and out for each dilution.
-dilutions: The number of dilutions after which the alternate media ratio is increased.
-initial_alt_media: The initial proportion of alternate media in the culture.
-alt_media_ratio_increase: The increment by which the proportion of alternate media is increased after the specified number of dilutions.
+* **'target_od'**: The desired OD to maintain.
+* **volume**: The volume of media to be pumped in and out for each dilution.
+* **dilutions**: The number of dilutions after which the alternate media ratio is increased.
+* **initial_alt_media**: The initial proportion of alternate media in the culture.
+* **alt_media_ratio_increase**: The increment by which the proportion of alternate media is increased after the specified number of dilutions.
 
 
 ## Internal Mechanics:
