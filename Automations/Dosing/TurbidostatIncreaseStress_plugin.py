@@ -1,9 +1,9 @@
 
-
 from pioreactor.automations.dosing.base import DosingAutomationJobContrib
 from pioreactor.utils import local_persistant_storage
 from pioreactor.exc import CalibrationError
 from pioreactor.background_jobs.dosing_control import DosingController
+from pioreactor.utils import is_pio_job_running
 
 
 __plugin_summary__ = "Dosing automation for maintaining target OD with increasing alternate media ratio"
@@ -51,11 +51,12 @@ class TurbidostatIncreaseStress(DosingAutomationJobContrib):
 
 
     def execute(self):
-    # Check if the latest OD reading is available
-    if is_job_running(ODReading.job_name, unit=self.unit, experiment=self.experiment):
-        latest_od = self.latest_od.get('2')  # 2 is the channel for OD readings
-
-        if (latest_od is not None) and (latest_od > self.target_od):
+        # Check if the latest OD reading is available
+        if not is_pio_job_running("od_reading") or self.latest_od is None:
+            self.logger.warning("OD Reading job is not ready. Latest OD data is not available.")
+            return
+        
+        if (self.latest_od['2'] > self.target_od):
             self.dilution_count += 1
             alt_media_ml = self.volume * self.alt_media_ratio # This calculates the volume of alternate media to add based on the current alt_media_ratio.
             media_ml = self.volume - alt_media_ml              # This calculates the remaining volume to be filled with normal media.
@@ -63,14 +64,9 @@ class TurbidostatIncreaseStress(DosingAutomationJobContrib):
 
             if self.dilution_count >= self.dilutions:
                 self.update_media_ratio() # If true, update_media_ratio method is called to update the ratio of alternate media
-                self.dilution_count = 0 # Reset the count for the next cycle
-    else:
-        self.logger.warning("OD Reading job is not running. Latest OD data is not available.")
+                self.dilution_count = 0 # Reset the count for the next cycle        
    
 
     def update_media_ratio(self):
         self.alt_media_ratio += self.alt_media_ratio_increase
         self.alt_media_ratio = min(self.alt_media_ratio, 1.0)  # Ensure it doesn't exceed 100%
-
-
-
